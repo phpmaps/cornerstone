@@ -1,0 +1,341 @@
+/**
+http://foundation.zurb.com/sites/docs/v/5.5.3/media-queries.html
+https://stackoverflow.com/questions/40565709/where-can-i-find-the-responsive-css-in-stencil-on-bigcommerce
+$screen-large:                  1261px; // 1
+$screen-medium:                 801px;
+$screen-small:                  551px;
+**/
+
+$logo-color: rgb(69, 69, 69);
+
+.sacramento {
+    font-family: 'Sacramento', cursive;
+    text-shadow: .2px .2px $logo-color; /* hack to make sacramento more bold - rgb(69, 69, 69); */
+}
+
+.logo-color {
+    color: $logo-color;
+}
+
+.ssb-social-network-links {
+    @include breakpoint("small") {
+        display: none;
+    }
+    @include breakpoint("medium") {
+        position: absolute;
+        display:block;
+        top:40px;
+        right:0;
+        margin-right:10px;
+    }
+
+    @include breakpoint("large") {
+        position: absolute;
+        display:block;
+        top:40px;
+        right:0;
+        margin-right:100px;
+    }
+}
+
+.old-btn.inverse {
+    background-color: #aca9a9;
+    outline-color: #aca9a9;
+    color: #fff;
+}
+
+
+.old-btn {
+    background-color: #fcc4ab;
+    border: 1px #fff dashed;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    padding: 5px;
+    outline: 3px solid #fcc4ab;
+    margin: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Karla', Arial, Sans-Serif;
+    letter-spacing: 0.1em;
+    font-weight: normal;
+    line-height: normal;
+    -moz-transition: background-color 150ms ease;
+    -webkit-transition: background-color 150ms ease;
+    -o-transition: background-color 150ms ease;
+    transition: background-color 150ms ease, outline 150ms ease;
+}
+
+.body {
+    @include breakpoint("medium") {
+        margin-top:230px;
+    }
+}
+
+.header{
+    @include breakpoint("medium") {
+        position: fixed;
+        height: 190px;
+    }
+
+    @include breakpoint("large") {
+        position: fixed;
+        height: 190px;
+    }
+
+}
+
+// .navUser-section--alt {
+//     @include breakpoint("medium") {
+//         float: none;
+//     }
+// }
+
+.navUser{
+    @include breakpoint("small") {
+        margin-top: 20px;
+    }
+    @include breakpoint("medium") {
+        margin-top: 0px;
+        display: relative;
+        text-align: center;
+        top: 0px;
+    }
+
+    @include breakpoint("large") {
+        margin-top: 0px;
+        display: relative;
+        text-align: center;
+        top: 0px;
+        right:20px
+    }
+}
+
+.navUser ul{
+    @include breakpoint("small") {
+        margin-top: 20px;
+    }
+    @include breakpoint("medium") {
+        margin-top: 0px;
+        display: inline-block;
+    }
+
+    @include breakpoint("large") {
+        margin-top: 0px;
+        display: inline-block;
+    }
+}
+
+.navPages-container{ /* product categories nav */
+    color: #5a5353;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: inherit;
+    letter-spacing: 0.1em;
+    @include breakpoint("medium") {
+        top:94px;
+    }
+    @include breakpoint("large") {
+        top:108px;
+    }
+}
+
+.navPages-action {
+    color: #4f4f4f;
+    padding: 0.78571rem 1.14286rem 1.14286rem;
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.navUser-action {
+    @include breakpoint("medium") {
+        color: #000;
+        font-weight: 400;
+        padding-top: .2rem;
+        padding-left: 0.78571rem;
+        padding-right: 0.78571rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}
+
+.logo {
+    position: relative;
+    background-image: url("http://shopsueyboutique.com/content/logo-graphic.png");
+    background-repeat: no-repeat;
+    display:block;
+    @include breakpoint("small") {
+        background-size:cover;
+        background-position: 50px -94px;
+    }
+    @include breakpoint("medium") {
+        //864 / 648
+        //221 /166
+        //background-size:auto;
+        background-size: 648px 166px;
+        background-position:16px -20px;
+    }
+
+    @include breakpoint("large") {
+        //864 / 648
+        //221 /166
+        //background-size:auto;
+        background-size: 864px 221px;
+        background-position:70px -58px;
+    }
+}
+
+.brand{
+    height: 70px;
+    @include breakpoint("medium") {
+        position: absolute;
+        top: 0;
+        right:0;
+        left:0;
+        height: 190px;
+    }
+}
+
+.header-logo {
+    @include breakpoint("medium") {
+        margin: 6rem auto 4.5rem;
+        padding: 0;
+    }
+
+    @include breakpoint("large") {
+        margin: 6rem auto 4.5rem;
+        padding: 0;
+    }
+}
+
+.header-logo-text {
+    display: block;
+    font-weight: 300;
+    letter-spacing: 0rem;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    padding: 0.21429rem 0;
+    text-overflow: ellipsis;
+    text-transform: none;
+    white-space: nowrap;
+
+    @include breakpoint("small") {
+        font-size: 38px;
+        margin-top: 10px;
+    }
+
+    @include breakpoint("medium") {
+        text-align: left;
+        margin-left: 158px;
+        font-size: 38px;
+        margin-top: 4px;
+    }
+
+    @include breakpoint("large") {
+        text-align: left;
+        margin-left: 202px;
+        font-size: 44px;
+        margin-top: 4px;
+    }
+}
+
+/** ios portrat 6 **/
+@media only screen 
+and (min-device-width : 375px) 
+and (max-device-width : 413px) 
+and (orientation : portrait) { 
+    /* STYLES GO HERE */ 
+    .logo-color {
+        color: $logo-color;
+    }
+    .logo {
+        background-size:cover;
+        background-position: 50px -44px;
+    }
+    .header-logo-text {
+        display: block;
+        font-size: 32px;
+        margin-top: 6px;
+    }
+}
+
+/** ios portrat 6+ **/
+@media only screen 
+and (min-device-width : 414px) 
+and (max-device-width : 458px) 
+and (orientation : portrait) { 
+    /* STYLES GO HERE */ 
+    .logo-color {
+        color: $logo-color;
+    
+    }
+    .logo {
+        background-size:cover;
+        background-position: 50px -44px;
+    }
+    .header-logo-text {
+        display: block;
+        font-size: 31px;
+        margin-top: 8px;
+    }
+}
+
+/** andoid home tablet portrat **/
+@media only screen 
+and (min-device-width : 459px) 
+and (max-device-width : 680px) 
+and (orientation : portrait) { 
+    .logo {
+        background-size:cover;
+        background-position: 50px -74px;
+    }
+    .header-logo-text {
+        display: block;
+        font-size: 31px;
+        margin-top: 8px;
+    }
+}
+
+
+/** heather's home imac  **/
+@media only screen 
+and (min-device-width : 1900px) 
+and (max-device-width : 5000px) { 
+    .top {
+        position: fixed;
+        width: 100%;
+        height: 189px;
+        background-color: #fff;
+        display: block;
+    }
+    .brand{
+        width: 75%;
+        position: fixed;
+        left: 50%;
+        margin-left: -37.5%;
+    }
+    .navUser{
+        margin-top: 0px;
+        display: relative;
+        text-align: center;
+        top: 0px;
+        right:310px
+    }
+    .logo {
+        background-size: 864px 221px;
+        background-position:70px -58px;
+    }
+    .logo-color {
+        color: $logo-color;
+    }
+    .header-logo-text {
+        display: block;
+        font-size: 48px;
+        margin-top: 8px;
+    }
+}

@@ -1,3 +1,4 @@
+
 {{#if banners.top}}
 <div class="banners" data-banner-location="top">
     <div class="banner">
@@ -5,26 +6,53 @@
     </div>
 </div>
 {{/if}}
+
 <header class="header" role="banner">
+    <div class="top">
     <a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
         <span class="mobileMenu-toggleIcon">Toggle menu</span>
     </a>
 
     {{> components/common/navigation}}
 
-    {{#if template_file '===' 'pages/home'}}
-        <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
-            {{> components/common/store-logo}}
+
+    <div class="brand logo">
+        <div class="art"></div>
+        <h1 class="header-logo header-logo--center">
+            <a href="http://shopsueyboutique.com/">
+                <span class="header-logo-text sacramento logo-color">Shop Suey Boutique</span>
+            </a>
         </h1>
-    {{else}}
-        <div class="header-logo header-logo--{{theme_settings.logo-position}}">
-            {{> components/common/store-logo}}
-        </div>
-    {{/if}}
+
+        <!--
+        {{#if template_file '===' 'pages/home'}}
+            <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
+                {{> components/common/store-logo}}
+            </h1>
+        {{else}}
+            <div class="header-logo header-logo--{{theme_settings.logo-position}}">
+                {{> components/common/store-logo}}
+            </div>
+        {{/if}}
+        -->
+
+        <div class="ssb-social-network-links">
+                    <input class="old-btn inverse" id="wishListPromotion" style="margin-top:16px; margin-right:14px; font-size: 75%;" type="submit" value="Newsletter">
+                    <div id="social" style="padding-top: 7px; float: right;">
+
+                        <a rel="nofollow" target="_blank" href="https://twitter.com/ShopSueyBoutiqu"><img src="http://cdn2.bigcommerce.com/server3100/z20cd1wb/product_images/uploaded_images/twitter-old.jpg" style="margin-bottom:6px;"></a> 
+                        <a rel="nofollow" target="_blank" href="https://www.facebook.com/pages/Shop-Suey-Boutique/77487164225"><img src="/content/social/facebook-old.png" style="margin-bottom:6px;"></a> 
+                                
+                        <a rel="nofollow" href="http://pinterest.com/shopsueypins/"><img src="/content/social/pinterest-old.jpg" style="margin-bottom:6px;"></a>
+                        
+                        <a rel="nofollow" target="_blank" href="https://instagram.com/shopsueyboutique"><img src="http://cdn2.bigcommerce.com/server3100/z20cd1wb/product_images/uploaded_images/instagr-40.png?t=1398725710"></a>
+                    </div>
+                </div>
+    </div>
 
 
     <div class="navPages-container" id="menu" data-menu>
         {{> components/common/navigation-menu}}
     </div>
-
+</div>
 </header>
