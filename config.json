@@ -234,20 +234,12 @@
     "optimizedCheckout-headingSecondary-color": "#333333",
     "optimizedCheckout-headingSecondary-font": "Google_Montserrat_700",
     "optimizedCheckout-body-backgroundColor": "#ffffff",
-<<<<<<< HEAD
-    "optimizedCheckout-contentPrimary-color": "#5a5353",
-    "optimizedCheckout-contentPrimary-font": "Google_Karla_400",
-    "optimizedCheckout-contentSecondary-color": "#989898",
-    "optimizedCheckout-contentSecondary-font": "Google_Karla_400",
-    "optimizedCheckout-buttonPrimary-font": "Google_Karla_400",
-=======
     "optimizedCheckout-colorFocus": "#4496f6",
     "optimizedCheckout-contentPrimary-color": "#333333",
     "optimizedCheckout-contentPrimary-font": "Google_Montserrat_500",
     "optimizedCheckout-contentSecondary-color": "#757575",
     "optimizedCheckout-contentSecondary-font": "Google_Montserrat_500",
     "optimizedCheckout-buttonPrimary-font": "Google_Montserrat_500",
->>>>>>> upstream/master
     "optimizedCheckout-buttonPrimary-color": "#ffffff",
     "optimizedCheckout-buttonPrimary-colorHover": "#ffffff",
     "optimizedCheckout-buttonPrimary-colorActive": "#ffffff",

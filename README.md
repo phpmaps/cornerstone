@@ -1,3 +1,20 @@
+# Process and Resources
+
+https://medium.com/sweetmeat/how-to-keep-a-downstream-git-repository-current-with-upstream-repository-changes-10b76fad6d97
+https://docs.anaconda.com/anaconda/user-guide/tasks/switch-environment/
+
+```
+conda deactivate
+conda activate py2
+python --version
+```
+
+```
+nvm install 8.12.0
+nvm use 8.12.0
+```
+
+
 # Cornerstone
 [![Build Status](https://travis-ci.org/bigcommerce/cornerstone.svg?branch=master)](https://travis-ci.org/bigcommerce/cornerstone)
 
