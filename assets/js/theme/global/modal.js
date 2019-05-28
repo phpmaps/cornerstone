@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import foundation from './foundation';
 
 const bodyActiveClass = 'has-activeModal';
@@ -108,6 +107,12 @@ export class Modal {
         this.onModalClosed = this.onModalClosed.bind(this);
 
         this.bindEvents();
+
+        /* STRF-2471 - Multiple Wish Lists - prevents double-firing
+         * of foundation.dropdown click.fndtn.dropdown event */
+        this.$modal.on('click', '.dropdown-menu-button', e => {
+            e.stopPropagation();
+        });
     }
 
     get pending() {
@@ -220,7 +225,7 @@ export default function modalFactory(selector = '[data-reveal]', options = {}) {
 
     return $modals.map((index, element) => {
         const $modal = $(element);
-        const instanceKey = 'modal-instance';
+        const instanceKey = 'modalInstance';
         const cachedModal = $modal.data(instanceKey);
 
         if (cachedModal instanceof Modal) {
@@ -239,7 +244,21 @@ export default function modalFactory(selector = '[data-reveal]', options = {}) {
  * Return the default page modal
  */
 export function defaultModal() {
-    const modal = modalFactory('#modal')[0];
+    return modalFactory('#modal')[0];
+}
 
-    return modal;
+/*
+ * Return the default alert modal
+ */
+export function alertModal() {
+    return modalFactory('#alert-modal')[0];
+}
+
+/*
+ * Display the given message in the default alert modal
+ */
+export function showAlertModal(message) {
+    const modal = alertModal();
+    modal.open();
+    modal.updateContent(`<span>${message}</span>`);
 }

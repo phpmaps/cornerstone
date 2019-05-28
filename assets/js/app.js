@@ -1,96 +1,97 @@
 __webpack_public_path__ = window.__webpack_public_path__; // eslint-disable-line
 
-import 'babel-polyfill';
-import $ from 'jquery';
 import Global from './theme/global';
 
 const getAccount = () => import('./theme/account');
 const getLogin = () => import('./theme/auth');
+const noop = null;
+
 const pageClasses = {
-    'pages/account/orders/all': getAccount,
-    'pages/account/orders/details': getAccount,
-    'pages/account/addresses': getAccount,
-    'pages/account/add-address': getAccount,
-    'pages/account/add-return': getAccount,
-    'pages/account/add-wishlist': () => import('./theme/wishlist'),
-    'pages/account/recent-items': getAccount,
-    'pages/account/download-item': getAccount,
-    'pages/account/edit': getAccount,
-    'pages/account/inbox': getAccount,
-    'pages/account/return-saved': getAccount,
-    'pages/account/returns': getAccount,
-    'pages/auth/login': getLogin,
-    'pages/auth/account-created': getLogin,
-    'pages/auth/create-account': getLogin,
-    'pages/auth/new-password': getLogin,
-    'pages/auth/forgot-password': getLogin,
-    'pages/blog': () => import('./theme/blog'),
-    'pages/blog-post': () => import('./theme/blog'),
-    'pages/brand': () => import('./theme/brand'),
-    'pages/brands': () => import('./theme/brand'),
-    'pages/cart': () => import('./theme/cart'),
-    'pages/category': () => import('./theme/category'),
-    'pages/compare': () => import('./theme/compare'),
-    'pages/contact-us': () => import('./theme/contact-us'),
-    'pages/errors': () => import('./theme/errors'),
-    'pages/errors/404': () => import('./theme/404-error'),
-    'pages/gift-certificate/purchase': () => import('./theme/gift-certificate'),
-    'pages/gift-certificate/balance': () => import('./theme/gift-certificate'),
-    'pages/gift-certificate/redeem': () => import('./theme/gift-certificate'),
-    'pages/home': () => import('./theme/home'),
-    'pages/order-complete': () => import('./theme/order-complete'),
-    'pages/page': () => import('./theme/page'),
-    'pages/product': () => import('./theme/product'),
-    'pages/amp/product-options': () => import('./theme/product'),
-    'pages/search': () => import('./theme/search'),
-    'pages/rss': () => import('./theme/rss'),
-    'pages/sitemap': () => import('./theme/sitemap'),
-    'pages/subscribed': () => import('./theme/subscribe'),
-    'pages/account/wishlist-details': () => import('./theme/wishlist'),
-    'pages/account/wishlists': () => import('./theme/wishlist'),
+    account_orderstatus: getAccount,
+    account_order: getAccount,
+    account_addressbook: getAccount,
+    shippingaddressform: getAccount,
+    account_new_return: getAccount,
+    'add-wishlist': () => import('./theme/wishlist'),
+    account_recentitems: getAccount,
+    account_downloaditem: getAccount,
+    editaccount: getAccount,
+    account_inbox: getAccount,
+    account_saved_return: getAccount,
+    account_returns: getAccount,
+    account_paymentmethods: getAccount,
+    account_addpaymentmethod: getAccount,
+    account_editpaymentmethod: getAccount,
+    login: getLogin,
+    createaccount_thanks: getLogin,
+    createaccount: getLogin,
+    getnewpassword: getLogin,
+    forgotpassword: getLogin,
+    blog: noop,
+    blog_post: noop,
+    brand: () => import('./theme/brand'),
+    brands: noop,
+    cart: () => import('./theme/cart'),
+    category: () => import('./theme/category'),
+    compare: () => import('./theme/compare'),
+    page_contact_form: () => import('./theme/contact-us'),
+    error: noop,
+    404: noop,
+    giftcertificates: () => import('./theme/gift-certificate'),
+    giftcertificates_balance: () => import('./theme/gift-certificate'),
+    giftcertificates_redeem: () => import('./theme/gift-certificate'),
+    default: noop,
+    page: noop,
+    product: () => import('./theme/product'),
+    amp_product_options: () => import('./theme/product'),
+    search: () => import('./theme/search'),
+    rss: noop,
+    sitemap: noop,
+    newsletter_subscribe: noop,
+    wishlist: () => import('./theme/wishlist'),
+    wishlists: () => import('./theme/wishlist'),
 };
+
+const customClasses = {};
 
 /**
  * This function gets added to the global window and then called
  * on page load with the current template loaded and JS Context passed in
- * @todo use page_type instead of template_file (STENCIL-2922)
- * @param templateFile String
+ * @param pageType String
  * @param contextJSON
  * @returns {*}
  */
-window.stencilBootstrap = function stencilBootstrap(templateFile, contextJSON = null, loadGlobal = true) {
-    const context = JSON.parse(contextJSON || {});
+window.stencilBootstrap = function stencilBootstrap(pageType, contextJSON = null, loadGlobal = true) {
+    const context = JSON.parse(contextJSON || '{}');
 
     return {
         load() {
-            $(async () => {
-                let globalClass;
-                let pageClass;
-                let PageClass;
-
-                // Finds the appropriate class from the pageType.
-                const pageClassImporter = pageClasses[templateFile];
-                if (typeof pageClassImporter === 'function') {
-                    PageClass = (await pageClassImporter()).default;
-                }
-
+            $(() => {
+                // Load globals
                 if (loadGlobal) {
-                    globalClass = new Global();
-                    globalClass.context = context;
+                    Global.load(context);
                 }
 
-                if (PageClass) {
-                    pageClass = new PageClass(context);
-                    pageClass.context = context;
+                const importPromises = [];
+
+                // Find the appropriate page loader based on pageType
+                const pageClassImporter = pageClasses[pageType];
+                if (typeof pageClassImporter === 'function') {
+                    importPromises.push(pageClassImporter());
                 }
 
-                if (globalClass) {
-                    globalClass.load();
+                // See if there is a page class default for a custom template
+                const customTemplateImporter = customClasses[context.template];
+                if (typeof customTemplateImporter === 'function') {
+                    importPromises.push(customTemplateImporter());
                 }
 
-                if (pageClass) {
-                    pageClass.load();
-                }
+                // Wait for imports to resolve, then call load() on them
+                Promise.all(importPromises).then(imports => {
+                    imports.forEach(imported => {
+                        imported.default.load(context);
+                    });
+                });
             });
         },
     };

@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import _ from 'lodash';
 import utils from '@bigcommerce/stencil-utils';
 import StencilDropDown from './stencil-dropdown';
@@ -10,10 +9,10 @@ export default function () {
     const $searchQuery = $('#search_query');
     const stencilDropDownExtendables = {
         hide: () => {
-            $searchQuery.blur();
+            $searchQuery.trigger('blur');
         },
         show: (event) => {
-            $searchQuery.focus();
+            $searchQuery.trigger('focus');
             event.stopPropagation();
         },
     };
@@ -52,7 +51,7 @@ export default function () {
     });
 
     // Catch the submission of the quick-search
-    $quickSearchDiv.on('submit', (event) => {
+    $quickSearchDiv.on('submit', event => {
         const searchQuery = $(event.currentTarget).find('input').val();
 
         if (searchQuery.length === 0) {

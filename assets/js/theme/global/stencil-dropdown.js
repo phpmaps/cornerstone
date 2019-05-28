@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 export default class StencilDropdown {
     constructor(extendables) {
         this.extendables = extendables;
@@ -38,11 +36,11 @@ export default class StencilDropdown {
     bind($dropDownTrigger, $container, style) {
         let modalOpened = false;
 
-        $dropDownTrigger.on('click', (event) => {
+        $dropDownTrigger.on('click', event => {
             const $cart = $('.is-open[data-cart-preview]');
 
             if ($cart) {
-                $cart.click();
+                $cart.trigger('click');
             }
 
             if ($container.hasClass('is-open')) {
@@ -52,7 +50,7 @@ export default class StencilDropdown {
             }
         });
 
-        $('body').click((e) => {
+        $('body').on('click', e => {
             // Call onClick handler
             if (this.extendables && this.extendables.onBodyClick) {
                 this.extendables.onBodyClick(e, $container);

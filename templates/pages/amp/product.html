@@ -16,9 +16,7 @@ product:
     {{#if settings.add_this.buttons}}
         <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
     {{/if}}
-    {{#if product.options}}
-        <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
-    {{/if}}
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
     {{#if product.videos}}
         <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
     {{/if}}
@@ -28,12 +26,12 @@ product:
     <div itemscope itemtype="http://schema.org/Product">
         {{> components/amp/products/product-view schema=true}}
     </div>
-    {{#if theme_settings.amp_analytics_id}}
+    {{#if settings.amp_analytics_id}}
         <amp-analytics type="googleanalytics">
             <script type="application/json">
             {
                 "vars": {
-                    "account": "{{theme_settings.amp_analytics_id}}"
+                    "account": "{{settings.amp_analytics_id}}"
                 },
                 "extraUrlParams": {
                     "cd1": "{{page_type}}",
@@ -71,6 +69,6 @@ product:
             </script>
         </amp-analytics>
     {{/if}}
-    {{> components/amp/common/footer }}
+    {{> components/amp/common/footer}}
 {{/partial}}
 {{> layout/amp }}
